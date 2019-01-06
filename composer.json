@@ -12,7 +12,9 @@
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "mpociot/laravel-apidoc-generator": "^3.3",
+        "zircote/swagger-php": "^3.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
