@@ -14,23 +14,7 @@ use Validator;
 class GeocodeController extends Controller
 {
 
-    /**
-     * Write coordinates to server
-     *
-     * @bodyParam latitude string required The latitude of to be saved.
-     * @bodyParam longitude string required The longitude of to be saved.
-     *
-     * @response {
-     *  "result": "saved"
-     * }
-     * @response {
-     *  "0":      "The name has already been taken.",
-     *  "result": "coordinates attached  to old address",
-     * }
-     * @response {
-     *  "result": "address not found"
-     * }
-     */
+   //Usage Example for Postman:  POST   https://5pro.im-sto-gram.com/api/geocode/46.96855382989687/32.01543303802873
     public function writeCoordinates($latitude, $longitude)
     {
         $apiKey = env('GOOGLE_API','AIzaSyDL0LWO9p6xdFB8bfBqJIrwV-iC4cpZ2cI');
@@ -64,43 +48,15 @@ class GeocodeController extends Controller
             return ['result' => 'address not found'];
         }
     }
-    /**
-     * Get all regions from server
-     *
-     *
-     * @response {
-     *  "regions": [
-     *     {
-     *      "id": 1,
-     *      "name": "Vinnyts'ka oblast"
-     *     },
-     *     {
-     *      "id": 2,
-     *      "name": "Mykolaivs'ka oblast"
-     *     }
-     *   ]
-     * }
-     */
+
+    //Usage Example for Postman:  GET   https://5pro.im-sto-gram.com/api/geocode/regions
     public function getRegions()
     {
         $regions = Region::all(['id', 'name'])->toArray();
         return ['regions' => $regions];
     }
-    /**
-     * Get all addresses for requested region
-     *
-     * @bodyParam region_id region id.
-     *
-     * @response {
-     *  "addresses":[
-     *        "erhiia Zulinskoho St, 57, Vinnytsia, Vinnyts'ka oblast, Ukraine, 21000"
-     *        "erhiia Zulinskoho St, 323, Vinnytsia, Vinnyts'ka oblast, Ukraine, 21425"
-     *   ]
-     * }
-     * @response {
-     *  "addresses": "not found"
-     * }
-     */
+
+    //Usage Example for Postman:  GET https://5pro.im-sto-gram.com/api/geocode/addresses/1
     public function getAddresses($region_id)
     {
         $addresses = Region::where('id', $region_id)->first();
@@ -114,6 +70,7 @@ class GeocodeController extends Controller
         }
         return ['addresses' => 'not found'];
     }
+
 
     private function parseAddressComponents($addressComponents)
     {
